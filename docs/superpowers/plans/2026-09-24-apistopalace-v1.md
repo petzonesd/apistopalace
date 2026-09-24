@@ -24,27 +24,27 @@
 ### Task 1: Species foundation and Finder engine
 **Files:** src/data/species.mjs, src/data/taxonomy.mjs, src/lib/species.mjs, src/lib/finder.mjs, tests/domain.test.mjs, package.json.
 **Interfaces:** exports species array; isPublishable(record) boolean; findMatches(input, records) returns {matches, excluded, errors}. Match contains species, reasons, cautions, score.
-- [ ] Write behavior tests using hand-picked fixtures: small tank gives zero matches; bad number produces errors; incompatible water excludes; beginner cannot match specialist; draft never publishes.
-- [ ] Run `node --test tests/domain.test.mjs`; expect failing assertions against initial empty function implementations.
-- [ ] Implement gate with required prose/source fields and validated ranges. Implement constraints before preference ranking. Seed 94 dated taxonomy names separately from 12 complete editorial profiles.
-- [ ] Run `node --test tests/domain.test.mjs`; expect all tests passing. Commit foundation.
+- [x] Write behavior tests using hand-picked fixtures: small tank gives zero matches; bad number produces errors; incompatible water excludes; beginner cannot match specialist; draft never publishes.
+- [x] Run `node --test tests/domain.test.mjs`; expect failing assertions against initial empty function implementations.
+- [x] Implement gate with required prose/source fields and validated ranges. Implement constraints before preference ranking. Seed 94 dated taxonomy names separately from 12 complete editorial profiles.
+- [x] Run `node --test tests/domain.test.mjs`; expect all tests passing. Commit foundation.
 
 ### Task 2: Complete editorial site and interactive tools
 **Files:** scripts/build.mjs, src/pages/*.mjs, src/data/editorial.mjs, public/styles.css, public/app.mjs, public/assets/*, tests/build.test.mjs.
 **Interfaces:** build exports a route manifest at dist/routes.json; static HTML at directory/index.html; app consumes serialized public species data from /data/species.json and shared Finder module.
-- [ ] Write output tests: all eight core routes exist, drafts absent, internal links resolve, canonical/breadcrumb JSON parses, production sitemap excludes utilities, default preview disallows crawlers.
-- [ ] Run `node --test tests/build.test.mjs`; expect route/build output assertions to fail before generator implementation.
-- [ ] Implement layout, homepage, directory, species profile, group hubs, Finder form, comparison form and curated articles. Integrate verified photographic assets with credits. Use native labeled inputs and an explicit submit action; empty states always explain next steps.
-- [ ] Build with `node scripts/build.mjs` and run `node --test`; expect passing tests. Inspect desktop/mobile browser and exercise controls.
-- [ ] Commit the complete site.
+- [x] Write output tests: all eight core routes exist, drafts absent, internal links resolve, canonical/breadcrumb JSON parses, production sitemap excludes utilities, default preview disallows crawlers.
+- [x] Run `node --test tests/build.test.mjs`; expect route/build output assertions to fail before generator implementation.
+- [x] Implement layout, homepage, directory, species profile, group hubs, Finder form, comparison form and curated articles. Integrate verified photographic assets with credits. Use native labeled inputs and an explicit submit action; empty states always explain next steps.
+- [x] Build with `node scripts/build.mjs` and run `node --test`; expect passing tests. Inspect desktop/mobile browser and exercise controls.
+- [x] Commit the complete site.
 
 ### Task 3: Delivery validation, independent review and PR
 **Files:** README.md, docs/DEPLOYMENT.md, docs/CONTENT.md, docs/VALIDATION.md, .github/workflows/check.yml.
 **Interfaces:** `npm run build`, `npm test`, `npm run preview`; manually gated production build, no deploy job.
-- [ ] Document local preview, production build, host root/404 requirements, domain plan, rollback and explicit publication confirmation.
-- [ ] Add read-only CI tests/build. Verify all pages, assets, internal links, metadata and noindex behavior using `node --test`.
-- [ ] Request one independent whole-branch review while checking browser accessibility and launch documents locally; fix important findings with regression tests.
-- [ ] Commit, push only the feature branch and open a draft PR. Verify PR head matches local committed state. Report site/PR and outstanding approval for publication.
+- [x] Document local preview, production build, host root/404 requirements, domain plan, rollback and explicit publication confirmation.
+- [x] Add read-only CI tests/build. Verify all pages, assets, internal links, metadata and noindex behavior using `node --test`.
+- [x] Request one independent whole-branch review while checking browser accessibility and launch documents locally; fix important findings with regression tests.
+- [x] Commit, push only the feature branch and open a draft PR. Verify PR head matches local committed state. Report site/PR and outstanding approval for publication.
 
 ## Execution record
 Approved strategy and direct user instruction authorize execution continuously; no repeat design approval needed. Native implementation preserves the already approved shared-data architecture. Node static output is chosen for portability and minimal maintenance.
