@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {species} from '../src/data/species.mjs';
+import {taxonomy} from '../src/data/taxonomy.mjs';
+execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,SITE_ENV:'production'}});
+const routes=JSON.parse(readFileSync('dist/routes.json','utf8'));
+const html=path=>readFileSync(join('dist',path,'index.html'),'utf8');
+test('core sections and twelve substantive species routes exist',()=>{for(const p of ['species','finder','care','breeding','habitats','identify','comparisons','articles']) assert.ok(existsSync(`dist/${p}/index.html`),p);assert.equal(species.length,12);for(const s of species) assert.ok(html(`/species/${s.id}/`).includes(s.sections.overview));});
+test('full registry does not create thin public pages',()=>{assert.equal(taxonomy.length,94);assert.ok(!existsSync('dist/species/acrensis/index.html'));assert.ok(!readFileSync('dist/sitemap.xml','utf8').includes('/species/acrensis/'));});
+test('all internal navigation links and local assets resolve',()=>{assert.ok(routes.length>20);for(const r of routes){const text=html(r.path);for(const m of text.matchAll(/(?:href|src)="(\/[^"#?]*)(?:[?#][^"]*)?"/g)){const target=m[1];assert.ok(existsSync(join('dist',target.endsWith('/')?target+'index.html':target)),`${r.path} -> ${target}`)}}});
+test('canonical and structured data are valid on every page',()=>{assert.ok(routes.length);for(const r of routes){const text=html(r.path);assert.ok(text.includes(`rel="canonical" href="https://apistopalace.com${r.path}"`));const blocks=[...text.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)];assert.ok(blocks.length);for(const b of blocks) assert.doesNotThrow(()=>JSON.parse(b[1]));assert.equal((text.match(/<h1[ >]/g)||[]).length,1)}});
+test('production sitemap excludes Finder and includes profiles',()=>{const map=readFileSync('dist/sitemap.xml','utf8');assert.ok(!map.includes('/finder/'));assert.ok(map.includes('/species/cacatuoides/'));assert.ok(html('/finder/').includes('noindex,follow'));});
+test('preview build defaults to noindex and disallow',()=>{execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,SITE_ENV:''}});assert.match(readFileSync('dist/robots.txt','utf8'),/Disallow: \/\n/);assert.ok(html('/').includes('noindex,nofollow'));});
