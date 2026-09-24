@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.worktrees/
+.sites-runtime/
+.env*
+!.env.example
+.DS_Store
+coverage/
+test-results/
+playwright-report/
