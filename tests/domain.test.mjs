@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {isPublishable} from '../src/lib/species.mjs';
+import {findMatches} from '../src/lib/finder.mjs';
+const fish={id:'test',name:'Apistogramma test',common:'Test',status:'published',group:'test',region:'Test river',difficulty:'beginner',tankLitres:75,footprint:[60,30],ph:[6,7],gh:[1,8],temperature:[23,27],size:6,community:true,colors:['blue'],breedingDifficulty:'accessible',reviewed:'2026-09-24',sources:[{url:'https://example.org/fish',label:'Reference'}],sections:Object.fromEntries(['overview','identification','habitat','care','diet','breeding','tankmates','provenance'].map(k=>[k,'A substantive independently useful paragraph. '.repeat(8)]))};
+const input={litres:100,length:80,width:35,ph:6.5,gh:4,temperature:25,experience:'beginner',community:'peaceful',breeding:'observe',visual:'blue'};
+test('publishes complete sourced profiles but rejects drafts and incomplete content',()=>{assert.equal(isPublishable(fish),true);assert.equal(isPublishable({...fish,status:'draft'}),false);assert.equal(isPublishable({...fish,sections:{overview:'Short'}}),false);assert.equal(isPublishable({...fish,sources:[]}),false);assert.equal(isPublishable({...fish,ph:[7,6]}),false)});
+test('compatible fish returns explained result',()=>{const r=findMatches(input,[fish]);assert.equal(r.matches.length,1);assert.ok(r.matches[0].reasons.length>=3);assert.equal(r.errors.length,0)});
+test('volume cannot hide an insufficient footprint',()=>{const r=findMatches({...input,litres:200,length:40},[fish]);assert.equal(r.matches.length,0);assert.match(r.excluded[0].reasons.join(' '),/footprint/i)});
+test('visual preference cannot override unsuitable water',()=>{for(const change of [{ph:8},{gh:20},{temperature:30}]){const r=findMatches({...input,...change},[fish]);assert.equal(r.matches.length,0);assert.equal(r.excluded.length,1)}});
+test('blank and invalid values give errors instead of matches',()=>{for(const value of ['',NaN,Infinity,-1,null]){const r=findMatches({...input,litres:value},[fish]);assert.ok(r.errors.length);assert.equal(r.matches.length,0)}});
+test('experience and community requirements exclude specialists',()=>{const r=findMatches(input,[{...fish,difficulty:'advanced',community:false}]);assert.equal(r.matches.length,0);assert.equal(r.excluded.length,1)});
+test('drafts never enter Finder',()=>{assert.equal(findMatches(input,[{...fish,status:'draft'}]).matches.length,0)});
+test('breeding preference affects ranking and shows caveat',()=>{const a={...fish,id:'special',breedingDifficulty:'specialist'};const b={...fish,id:'easy'};const r=findMatches({...input,experience:'advanced',breeding:'breed'},[a,b]);assert.equal(r.matches[0].species.id,'easy');assert.ok(r.matches[1].cautions.length)});

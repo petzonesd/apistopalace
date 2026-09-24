@@ -1,0 +1,4 @@
+export const sectionKeys = ['overview','identification','habitat','care','diet','breeding','tankmates','provenance'];
+export function isPublishable(s) {
+  return Boolean(s && s.status === 'published' && /^[a-z][a-z-]+$/.test(s.id) && s.name && s.common && s.group && s.region && /^\d{4}-\d{2}-\d{2}$/.test(s.reviewed) && ['beginner','intermediate','advanced'].includes(s.difficulty) && s.tankLitres > 0 && s.size > 0 && s.footprint?.length === 2 && s.footprint.every(n=>Number.isFinite(n)&&n>0) && ['ph','gh','temperature'].every(k=>s[k]?.length===2&&s[k].every(Number.isFinite)&&s[k][0]<=s[k][1]) && s.sources?.length && s.sources.every(r=>/^https:\/\//.test(r.url)&&r.label) && sectionKeys.every(k=>typeof s.sections?.[k] === 'string' && s.sections[k].length >= 100) && Object.values(s.sections).join(' ').split(/\s+/).length >= 300);
+}
