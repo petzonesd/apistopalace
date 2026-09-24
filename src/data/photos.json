@@ -1,0 +1,48 @@
+[
+  {
+    "file": "cacatuoides-marcus-cyron.jpg",
+    "species": "Apistogramma cacatuoides",
+    "description": "Male double red aquarium form",
+    "author": "Marcus Cyron",
+    "source": "https://commons.wikimedia.org/wiki/File:Apistogramma_cacatuoides_double_red_male.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Apistogramma_cacatuoides_double_red_male.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "width": 1976,
+    "height": 1360,
+    "notes": "Author field says Made be Uploader; uploader and category identify Marcus Cyron. Downloaded original unchanged. If cropped for display, label cropped and retain the same license on the adapted photo.",
+    "output": "cacatuoides.webp",
+    "modifications": "Resized and converted to WebP; cropped by the page layout. Adapted photographs retain the original license."
+  },
+  {
+    "file": "agassizii-cisamarc.jpg",
+    "species": "Apistogramma agassizii",
+    "description": "Male in aquarium",
+    "author": "Cisamarc",
+    "source": "https://commons.wikimedia.org/wiki/File:Apistogramma_agassizii_in_aquarium.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Apistogramma_agassizii_in_aquarium.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "width": 3483,
+    "height": 2613,
+    "notes": "Downloaded original unchanged. If cropped for display, label cropped and retain the same license on the adapted photo.",
+    "output": "agassizii.webp",
+    "modifications": "Resized and converted to WebP; cropped by the page layout. Adapted photographs retain the original license."
+  },
+  {
+    "file": "borellii-dornenwolf.jpg",
+    "species": "Apistogramma borellii",
+    "description": "Opal male",
+    "author": "Dornenwolf",
+    "source": "https://commons.wikimedia.org/wiki/File:Apistogramma_borellii_%22Opal%22_male.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/2/22/Apistogramma_borellii_%22Opal%22_male.jpg",
+    "originalSource": "https://www.flickr.com/photos/gartenfreuden/24868589781/",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "width": 3078,
+    "height": 2001,
+    "notes": "Flickr license verified by Commons FlickreviewR. Downloaded original unchanged. Indicate crop if applied.",
+    "output": "borellii.webp",
+    "modifications": "Resized and converted to WebP; cropped by the page layout. Adapted photographs retain the original license."
+  }
+]
