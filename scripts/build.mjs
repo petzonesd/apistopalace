@@ -6,6 +6,7 @@ import {isPublishable} from '../src/lib/species.mjs';
 import {guides,articles,groups,comparisons} from '../src/data/editorial.mjs';
 import {layout,heading,prose,origin} from '../src/pages/layout.mjs';
 import {home} from '../src/pages/home.mjs';
+import {fieldCollection} from '../src/pages/field.mjs';
 import {profile} from '../src/pages/profile.mjs';
 import {directory,finder,comparisonHub} from '../src/pages/tools.mjs';
 import {speciesCard,compareTable,sourceLinks,relatedLinks} from '../src/pages/components.mjs';
@@ -22,7 +23,7 @@ await mkdir('dist/data',{recursive:true});await writeFile('dist/data/species.jso
 const routes=[];
 async function page(path,title,description,body,options={}){const index=options.index!==false;const target=join('dist',path);await mkdir(target,{recursive:true});await writeFile(join(target,'index.html'),layout({path,title,description,body,production,...options}));routes.push({path,title,index});}
 const crumb=(name,path)=>({name,path});
-await page('/','Explore the Kingdom of Apistogramma','A field guide to Apistogramma: species profiles, explained aquarium matches, care, breeding and habitats.',home(published));
+await page('/','Explore the Kingdom of Apistogramma','A field guide to Apistogramma: species profiles, explained aquarium matches, care, breeding and habitats.',home(published).replace('<section class="finder-callout wrap">',fieldCollection()+'<section class="finder-callout wrap">'));
 await page('/species/','Apistogramma species field guide','Browse and filter substantive Apistogramma profiles by name, experience and informal species group.',directory(published),{type:'CollectionPage',crumbs:[crumb('Species','/species/')]});
 await page('/finder/','Find your Apisto','Find suitable Apistogramma for your tank footprint, water, experience and breeding interests, with explained matches.',finder(),{index:false,crumbs:[crumb('Finder','/finder/')]});
 await page('/comparisons/','Compare Apistogramma species','Compare water targets, aquarium dimensions, experience and breeding requirements side by side.',comparisonHub(published,comparisons),{type:'CollectionPage',crumbs:[crumb('Comparisons','/comparisons/')]});
