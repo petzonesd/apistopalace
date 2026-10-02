@@ -14,6 +14,7 @@ import {escape as e,titleCase} from '../src/lib/html.mjs';
 const photos=JSON.parse(await readFile('src/data/photos.json','utf8'));
 const networkPhotos=JSON.parse(await readFile('src/data/networkPhotos.json','utf8'));
 const production=process.env.SITE_ENV==='production';
+const sitemapLastmod='2026-10-02';
 const published=species.filter(isPublishable);
 if(published.length!==species.filter(s=>s.status==='published').length) throw Error('A published species failed the completeness gate.');
 if(new Set(taxonomy.map(s=>s.id)).size!==taxonomy.length || published.some(s=>!taxonomy.some(t=>t.id===s.id))) throw Error('Invalid taxonomy registry');
@@ -40,5 +41,5 @@ await page('/404/','Page not found','Return to the ApistoPalace species guide.',
 await cp('dist/404/index.html','dist/404.html');
 await writeFile('dist/routes.json',JSON.stringify(routes,null,2));
 await writeFile('dist/robots.txt',production?`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`:'User-agent: *\nDisallow: /\n');
-await writeFile('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.filter(r=>r.index).map(r=>`<url><loc>${origin}${r.path}</loc></url>`).join('')}</urlset>`);
+await writeFile('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.filter(r=>r.index).map(r=>`<url><loc>${origin}${r.path}</loc><lastmod>${sitemapLastmod}</lastmod></url>`).join('')}</urlset>`);
 console.log(`Built ${routes.length} pages, ${published.length} profiles; ${production?'production metadata':'preview: noindex, robots disallow'}.`);
