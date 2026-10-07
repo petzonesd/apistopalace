@@ -2,6 +2,8 @@
 
 Prepared with the Intent `/organize` skill. Based on the 34 pages a local build generates, not on traffic data. Visual site map: [ia-sitemap.html](ia-sitemap.html).
 
+**Status (7 October 2026):** sections 2–6 and 8 are implemented on branch `seo/ia-overhaul`. Two corrections to the original audit: guide, article, comparison and group pages already had breadcrumbs, and Steindachneri's related links weren't duplicated (each card links twice, once on the photo and once on the title). Single-species groups got an anchored list on `/groups/` instead of their own pages, to avoid thin content.
+
 ## Summary
 
 The foundation is strong. Species pages carry breadcrumbs, structured data (`Article` and `BreadcrumbList` schema), an in-page table of contents, and a "Check availability" link to Pet Zone SD. The weak spots are how pages connect to each other and the wording of hub page titles:
@@ -70,7 +72,7 @@ These should be generated automatically from the data, not added by hand:
 2. **Species → guides.** Each "Aquarium care" section links to `/care/`, "Breeding" to `/breeding/`, "Natural habitat" to its basin's section of `/habitats/` (anchor link), and "Identification" to `/identify/`.
 3. **Guides → species.** Replace the external-only "Further reading" lists with 3–4 internal species examples first, then the outside sources.
 4. **Articles in context.** Link "Before your first Apisto" from `/care/`, the Finder, and every species marked Beginner. Link "Blackwater is more than color" from `/habitats/` and soft-water species.
-5. **"Worth a closer look" fallbacks.** Steindachneri's related-species links point to borellii twice and nowhere else. When a species has few related matches, fill the slots by shared traits (basin, size, difficulty) and never repeat a link.
+5. **Two-way related species.** A species page also lists every profile that names it as similar. That brings Steindachneri from 1 inbound link to 6.
 
 ## 5. Taxonomy and groups
 
@@ -87,7 +89,7 @@ These should be generated automatically from the data, not added by hand:
 ## 7. Wayfinding
 
 - Species pages handle wayfinding well (breadcrumb, current-page marker in the menu, table of contents).
-- Guide, comparison, article, and group pages should get the same breadcrumb and `BreadcrumbList` schema. For example: Home › Keeping guides › Breeding; Home › Compare › Borellii vs cacatuoides.
+- Guide, comparison, article, and group pages already have breadcrumbs and `BreadcrumbList` schema. Their labels now match the new menu (Compare, Field notes, Identification), and group pages sit under Species.
 
 ## 8. Pet Zone connection
 

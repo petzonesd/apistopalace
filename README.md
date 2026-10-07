@@ -2,7 +2,7 @@
 
 **Explore the Kingdom of Apistogramma.** An expedition-inspired field guide, independent of the Apistogrammarama repository.
 
-V1 includes 12 substantial species profiles, a dated 94-name taxonomy registry, searchable directory, explained Finder, interactive comparison table, three curated comparisons, two group hubs and complete care/breeding/habitat/identification guides.
+V1 includes 12 substantial species profiles, a dated 94-name taxonomy registry (listed A–Z at `/species/all-names/`), searchable directory, explained Finder, interactive comparison table, three curated comparisons, two group hubs and complete care/breeding/habitat/identification guides.
 
 ## Run locally
 
@@ -29,6 +29,7 @@ This only generates files. It never publishes, modifies DNS or connects the doma
 - `src/data/species.mjs`: shared profile prose, sources, aquarium targets and Finder traits.
 - `src/data/taxonomy.mjs`: dated genus registry, separate from publication.
 - `src/data/editorial.mjs`: guides, articles, groups and comparisons.
+- `src/data/shop.mjs`: PetZoneSD store links and the habitat-atlas basin each species links to.
 - `src/lib/`: publication gate, Finder rules and HTML helpers.
 - `src/pages/`: semantic static page templates.
 - `public/`: responsive styling, progressive interactive tools and licensed photos.
